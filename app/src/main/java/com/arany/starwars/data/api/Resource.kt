@@ -7,14 +7,14 @@ data class Resource<T>(
     val data: T?,
     val message:String?= null,
     val code: Int?= null,
-    val error: Error?= null,
+    val error: Error<T>?= null,
 
 ){
     companion object{
-        fun <T> success(data:T?, code: Int): Resource<T>{
-            return Resource(Status.SUCCESS, data, null, code)
+        fun <T> success(data: T?): Resource<T>{
+            return Resource(Status.SUCCESS, data, null)
         }
-        fun <T> error(errorCode: Int?, message: String, error: Error): Resource<T>{
+        fun <T> error(errorCode: Int?, message: String, error: Error<T>): Resource<T>{
             return Resource(Status.ERROR, null, message, errorCode, error)
         }
         fun <T> loading(data:T?=null): Resource<T>{
